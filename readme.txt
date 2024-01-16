@@ -1,0 +1,1 @@
+this little runner game based on the chrome dinosaur one, will be used to train myself in making games in python. The game will probably get some additional features after i finish the base version.
