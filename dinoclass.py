@@ -22,7 +22,7 @@ class Dinosaur:
         self.step_index = 0
         self.image = self.run_img[0]
         self.dino_rect = self.image.get_rect()
-        self.dino_rect.x = self.X_STATICPOSe
+        self.dino_rect.x = self.X_STATICPOS
         self.dino_rect.y = self.Y_STATICPOS
         
     def update(self, userInput):
