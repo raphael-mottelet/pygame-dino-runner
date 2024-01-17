@@ -12,7 +12,7 @@ SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 RUNNING = [pygame.image.load(os.path.join("assets/dino", "DinoRun1.png")), 
            pygame.image.load(os.path.join("assets/dino", "DinoRun2.png"))]
 JUMP = [pygame.image.load(os.path.join("assets/dino", "DinoJump.png"))]
-DUCKING = [pygame.image.load(os.path.join("assets/dino", "DinoDuck1.png")),
+PRONE = [pygame.image.load(os.path.join("assets/dino", "DinoDuck1.png")),
            pygame.image.load(os.path.join("assets/dino", "DinoDuck2.png"))]
 
 SMALL_CACTUS = [pygame.image.load(os.path.join("assets/cactus", "SmallCactus1.png")),
@@ -34,11 +34,14 @@ BG = [pygame.image.load(os.path.join("assets/other", "Track.png"))]
 # ... (previous code)
 
 class Dinosaur:
-    X_POS = 80
-    Y_POS = 310
+    X_STATICPOS = 80
+    Y_STATICPOS = 310
+
+    Y_PRONEPOS = 340
+
 
     def __init__(self):
-        self.duck_img = DUCKING
+        self.duck_img = PRONE
         self.run_img = RUNNING
         self.jump_img = JUMP
 
@@ -49,8 +52,8 @@ class Dinosaur:
         self.step_index = 0
         self.image = self.run_img[0]
         self.dino_rect = self.image.get_rect()
-        self.dino_rect.x = self.X_POS  # Fixed this line
-        self.dino_rect.y = self.Y_POS  # Fixed this line
+        self.dino_rect.x = self.X_STATICPOS  # Fixed this line
+        self.dino_rect.y = self.Y_STATICPOS  # Fixed this line
         
     def update(self, userInput):
         if self.dino_duck:
@@ -77,12 +80,15 @@ class Dinosaur:
             self.dino_jump = False
 
     def duck(self):
-        pass
+        self.image = self.duck_img[self.step_index // 5]
+        self.dino_rect.x = self.X_STATICPOS
+        self.dino_rect.y = self.Y_PRONEPOS
+        self.step_index += 1
     
     def run(self):
         self.image = self.run_img[self.step_index // 5]
-        self.dino_rect.x = self.X_POS
-        self.dino_rect.y = self.Y_POS
+        self.dino_rect.x = self.X_STATICPOS
+        self.dino_rect.y = self.Y_STATICPOS
         self.step_index += 1
 
     def jump(self):
@@ -109,7 +115,8 @@ def main():
         player.draw(SCREEN)
         player.update(userInput)
 
-        clock.tick(30)
+        clock.tick(35)
         pygame.display.update()
+
 
 main()
