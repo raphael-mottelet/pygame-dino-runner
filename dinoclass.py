@@ -7,6 +7,8 @@ class Dinosaur:
 
     Y_PRONEPOS = 340
 
+    JUMP_VEL = 8.5
+
 
     def __init__(self):
         self.prone_img = PRONE
@@ -20,8 +22,8 @@ class Dinosaur:
         self.step_index = 0
         self.image = self.run_img[0]
         self.dino_rect = self.image.get_rect()
-        self.dino_rect.x = self.X_STATICPOS  # Fixed this line
-        self.dino_rect.y = self.Y_STATICPOS  # Fixed this line
+        self.dino_rect.x = self.X_STATICPOSe
+        self.dino_rect.y = self.Y_STATICPOS
         
     def update(self, userInput):
         if self.dino_prone:
@@ -60,7 +62,15 @@ class Dinosaur:
         self.step_index += 1
 
     def jump(self):
-        pass
+        if self.dino_jump:
+            self.image = self.jump_img[0]
+            self.dino_rect.y -= self.JUMP_VEL * 4 
+            self.JUMP_VEL -= 0.8
+            if self.dino_rect.y >= self.Y_STATICPOS - self.JUMP_VEL:
+                self.dino_rect.y = self.Y_STATICPOS
+                self.dino_jump = False #avoid the little dino to go in space
+                self.JUMP_VEL = 8.5
+
 
     def draw(self, SCREEN):
         SCREEN.blit(self.image, (self.dino_rect.x, self.dino_rect.y))
