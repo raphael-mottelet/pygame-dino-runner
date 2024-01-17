@@ -9,11 +9,11 @@ class Dinosaur:
 
 
     def __init__(self):
-        self.duck_img = PRONE
+        self.prone_img = PRONE
         self.run_img = RUNNING
         self.jump_img = JUMP
 
-        self.dino_duck = False
+        self.dino_prone = False
         self.dino_run = True
         self.dino_jump = False
 
@@ -24,8 +24,8 @@ class Dinosaur:
         self.dino_rect.y = self.Y_STATICPOS  # Fixed this line
         
     def update(self, userInput):
-        if self.dino_duck:
-            self.duck()
+        if self.dino_prone:
+            self.prone()
         if self.dino_run:
             self.run()
         if self.dino_jump:
@@ -35,20 +35,20 @@ class Dinosaur:
             self.step_index = 0
 
         if userInput[pygame.K_UP] and not self.dino_jump:
-            self.dino_duck = False
+            self.dino_prone = False
             self.dino_run = False
             self.dino_jump = True
         elif userInput[pygame.K_DOWN] and not self.dino_jump:
-            self.dino_duck = True
+            self.dino_prone = True
             self.dino_run = False
             self.dino_jump = False
         elif not (self.dino_jump or userInput[pygame.K_DOWN]):
-            self.dino_duck = False
+            self.dino_prone = False
             self.dino_run = True
             self.dino_jump = False
 
-    def duck(self):
-        self.image = self.duck_img[self.step_index // 5]
+    def prone(self):
+        self.image = self.prone_img[self.step_index // 5]
         self.dino_rect.x = self.X_STATICPOS
         self.dino_rect.y = self.Y_PRONEPOS
         self.step_index += 1
