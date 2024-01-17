@@ -65,11 +65,11 @@ class Dinosaur:
         if self.dino_jump:
             self.image = self.jump_img[0]
             self.dino_rect.y -= self.JUMP_VEL * 4 
-            self.JUMP_VEL -= 0.8
+            self.JUMP_VEL -= 0.8 #we decrease jump speed to simulate gravity
             if self.dino_rect.y >= self.Y_STATICPOS - self.JUMP_VEL:
                 self.dino_rect.y = self.Y_STATICPOS
                 self.dino_jump = False #avoid the little dino to go in space
-                self.JUMP_VEL = 8.5
+                self.JUMP_VEL = 8.5 #we reset the jump to initial value (the ground)
 
 
     def draw(self, SCREEN):
