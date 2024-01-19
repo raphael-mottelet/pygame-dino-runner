@@ -1,17 +1,22 @@
 import pygame
 from gameconst import RUNNING, PRONE, JUMP, SCREEN, SCREEN_WIDTH, SCREEN_HEIGHT
 from dinoclass import Dinosaur
+from cloudclass import Cloud
+
 
 pygame.init()
 
 # ... (remaining code)
 
 def main():
+    global game_speed
     run = True
     clock = pygame.time.Clock()
     player = Dinosaur()
+    mycloud = Cloud()
+    game_speed = 14 #we adjust the speed of the game
 
-    while run:
+    while run: #our main function that will loop the game to keep the screen open
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -22,7 +27,10 @@ def main():
         player.draw(SCREEN)
         player.update(userInput)
 
-        clock.tick(35)
+        mycloud.draw(SCREEN)
+        mycloud.update()
+
+        clock.tick(70)
         pygame.display.update()
 
 
